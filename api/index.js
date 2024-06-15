@@ -14,14 +14,11 @@ mongoose.connect(process.env.MONGO).then(() => {
 })
 
 const __dirname = path.resolve();
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
 app.use(express.json());
-
-app.listen(3000, () => {
-  console.log('server is running on port 3000');
-});
 
 app.use('/api/user', userRoutes);
 app.use('/api/country', countryRoutes);
@@ -39,4 +36,8 @@ app.use((err, req, res, next) => {
     statusCode,
     message
   });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
